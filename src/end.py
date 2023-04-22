@@ -1,6 +1,6 @@
 import pygame
 from os import path
-from essentials.agreements import *
+from src.agreements import *
 
 
 # End screen class
@@ -14,8 +14,10 @@ class End:
         self.title = 'Congratulations!'
         self.subtitle1 = 'You won! Press ESC for another try'
         self.subtitle2 = 'Game made by igor_kiiisliy'
-        self.title_font = pygame.font.Font(pygame.font.match_font('lucidasans'), 72)
-        self.subtitle_font = pygame.font.Font(pygame.font.match_font('lucidaconsole'), 20)
+        self.title_font = pygame.font.Font(
+            pygame.font.match_font('lucidasans'), 72)
+        self.subtitle_font = pygame.font.Font(
+            pygame.font.match_font('lucidaconsole'), 20)
 
     # Processes player inputs
     def _process_events(self):
@@ -45,17 +47,20 @@ class End:
 
     # Draws text
     def _draw_text(self, screen):
-        string_title = self.title_font.render(self.title, True, pygame.Color('white'))
+        string_title = self.title_font.render(
+            self.title, True, pygame.Color('white'))
         rect_title = string_title.get_rect()
         rect_title = rect_title.move(240, 30)
         screen.blit(string_title, rect_title)
 
-        string_subtitle1 = self.title_font.render(self.subtitle1, True, pygame.Color('white'))
+        string_subtitle1 = self.title_font.render(
+            self.subtitle1, True, pygame.Color('white'))
         rect_subtitle1 = string_subtitle1.get_rect()
         rect_subtitle1 = rect_subtitle1.move(100, 220)
         screen.blit(string_subtitle1, rect_subtitle1)
 
-        string_subtitle2 = self.subtitle_font.render(self.subtitle2, True, pygame.Color('white'))
+        string_subtitle2 = self.subtitle_font.render(
+            self.subtitle2, True, pygame.Color('white'))
         rect_subtitle2 = string_subtitle2.get_rect()
         rect_subtitle2 = rect_subtitle2.move(40, 570)
         screen.blit(string_subtitle2, rect_subtitle2)

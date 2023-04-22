@@ -1,10 +1,10 @@
 import pygame
 from os import path
-from essentials.menu import MainMenu
-from essentials.rules import Rules
-from essentials.agreements import *
-from essentials.field import Field
-from essentials.end import End
+from src.menu import MainMenu
+from src.rules import Rules
+from src.agreements import *
+from src.field import Field
+from src.end import End
 
 
 # Main class for game processing

@@ -1,10 +1,11 @@
 import pygame
 from os import path
-from essentials.agreements import *
+from src.agreements import *
 
 
-# Class for character movement animation - stores sequence of images, giving correct animation
-# frames_for image must be divisor of FPS // 2 = 60 for every picture to be shown for equal amount of time
+# Class for character movement animation - stores sequence of images,
+# giving correct animation. Frames_for image must be divisor of FPS // 2 = 60
+# for every picture to be shown for equal amount of time
 class CharacterAnimation:
     def __init__(self, frames_for_image):
         self.images = []
@@ -12,11 +13,12 @@ class CharacterAnimation:
 
     # Add image to sequence
     def append(self, char_type, animation_type, pic_order):
-        self.images.append(pygame.image.load(path.join(DATA_PATH,
-                                                       IMAGE_PATH,
-                                                       TEXTURES_PATH,
-                                                       CHARACTERS_PATH,
-                                                       f'{char_type}_{animation_type}_{pic_order}.png')))
+        self.images.append(pygame.image.load(
+            path.join(DATA_PATH,
+                      IMAGE_PATH,
+                      TEXTURES_PATH,
+                      CHARACTERS_PATH,
+                      f'{char_type}_{animation_type}_{pic_order}.png')))
 
     # Get image from sequence
     def __getitem__(self, key):
@@ -69,16 +71,22 @@ class Human(pygame.sprite.Sprite):
     # Initialize animations for character
     def init_image(self):
         self.stand_image = pygame.image.load(
-            path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, CHARACTERS_PATH, f'{self.char_type}.png'))
+            path.join(DATA_PATH,
+                      IMAGE_PATH,
+                      TEXTURES_PATH,
+                      CHARACTERS_PATH,
+                      f'{self.char_type}.png'))
 
         self.running_left_anim = CharacterAnimation(20)
 
-        for i in range(1, (FPS // 2) // self.running_left_anim.frames_for_image):
+        for i in range(1,
+                       (FPS // 2) // self.running_left_anim.frames_for_image):
             self.running_left_anim.append(self.char_type, 'running_left', i)
 
         self.running_right_anim = CharacterAnimation(20)
 
-        for i in range(1, (FPS // 2) // self.running_right_anim.frames_for_image):
+        for i in range(1,
+                       (FPS // 2) // self.running_right_anim.frames_for_image):
             self.running_right_anim.append(self.char_type, 'running_right', i)
 
         self.cur_running_left_anim = 0
@@ -92,11 +100,15 @@ class Human(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-    # Update health. 'check' mode is required if character haven`t changed his hp, but invincibility needs to be updated
+    # Update health. 'check' mode is required if character haven`t changed his
+    # hp, but invincibility needs to be updated
     def update_hp(self, mode=''):
         if not self.invincible and mode != 'check':
             self.hp -= 1
-            self.window.sound.play(pygame.mixer.Sound(path.join(DATA_PATH, SOUND_PATH, 'classic_hurt.wav')))
+            self.window.sound.play(
+                pygame.mixer.Sound(path.join(DATA_PATH,
+                                             SOUND_PATH,
+                                             'classic_hurt.wav')))
             self.invincible = True
             self.hit_tick = pygame.time.get_ticks()
         else:
@@ -106,9 +118,14 @@ class Human(pygame.sprite.Sprite):
                 self.invincible = False
             elif tick - self.hit_tick >= self.invincibility_duration // 4:
                 self.image = pygame.image.load(
-                    path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, CHARACTERS_PATH, f'{self.char_type}.png'))
+                    path.join(DATA_PATH,
+                              IMAGE_PATH,
+                              TEXTURES_PATH,
+                              CHARACTERS_PATH,
+                              f'{self.char_type}.png'))
 
-    # Moves character by x and check if it can be moved - else returns x to previous position
+    # Moves character by x and check if it can be moved - else returns x to
+    # previous position
     def move_by_x(self, blocks, commands):
         previous_x = self.x
 
@@ -131,7 +148,8 @@ class Human(pygame.sprite.Sprite):
 
         self.x_vector = self.x - previous_x
 
-    # Moves character by y and check if it can be moved - else returns y to previous position and puts it on ground if
+    # Moves character by y and check if it can be moved - else returns y to
+    # previous position and puts it on ground if
     # needed
     def move_by_y(self, blocks, commands):
         previous_y = self.y
@@ -221,13 +239,15 @@ class Human(pygame.sprite.Sprite):
     # Sets player image to running state
     def load_run_image(self, upside_down=False):
         if self.x_vector < 0:
-            self.cur_running_left_anim = (self.cur_running_left_anim + 1) % (FPS // 2)
+            self.cur_running_left_anim = \
+                (self.cur_running_left_anim + 1) % (FPS // 2)
             self.image = self.running_left_anim[self.cur_running_left_anim]
             if upside_down:
                 self.image = pygame.transform.flip(self.image, False, True)
             self.cur_running_right_anim = 0
         elif self.x_vector > 0:
-            self.cur_running_right_anim = (self.cur_running_right_anim + 1) % (FPS // 2)
+            self.cur_running_right_anim = \
+                (self.cur_running_right_anim + 1) % (FPS // 2)
             self.image = self.running_right_anim[self.cur_running_right_anim]
             if upside_down:
                 self.image = pygame.transform.flip(self.image, False, True)
@@ -242,27 +262,30 @@ class Human(pygame.sprite.Sprite):
     # Sets player image to falling state
     def load_fall_image(self, upside_down=False):
         if self.x_vector > 0:
-            self.image = pygame.image.load(path.join(DATA_PATH,
-                                                     IMAGE_PATH,
-                                                     TEXTURES_PATH,
-                                                     CHARACTERS_PATH,
-                                                     f'{self.char_type}_jumping_right.png'))
+            self.image = pygame.image.load(
+                path.join(DATA_PATH,
+                          IMAGE_PATH,
+                          TEXTURES_PATH,
+                          CHARACTERS_PATH,
+                          f'{self.char_type}_jumping_right.png'))
             if upside_down:
                 self.image = pygame.transform.flip(self.image, False, True)
         elif self.x_vector < 0:
-            self.image = pygame.image.load(path.join(DATA_PATH,
-                                                     IMAGE_PATH,
-                                                     TEXTURES_PATH,
-                                                     CHARACTERS_PATH,
-                                                     f'{self.char_type}_jumping_left.png'))
+            self.image = pygame.image.load(
+                path.join(DATA_PATH,
+                          IMAGE_PATH,
+                          TEXTURES_PATH,
+                          CHARACTERS_PATH,
+                          f'{self.char_type}_jumping_left.png'))
             if upside_down:
                 self.image = pygame.transform.flip(self.image, False, True)
         else:
-            self.image = pygame.image.load(path.join(DATA_PATH,
-                                                     IMAGE_PATH,
-                                                     TEXTURES_PATH,
-                                                     CHARACTERS_PATH,
-                                                     f'{self.char_type}_jumping.png'))
+            self.image = pygame.image.load(
+                path.join(DATA_PATH,
+                          IMAGE_PATH,
+                          TEXTURES_PATH,
+                          CHARACTERS_PATH,
+                          f'{self.char_type}_jumping.png'))
             if upside_down:
                 self.image = pygame.transform.flip(self.image, False, True)
 
@@ -315,7 +338,8 @@ class Pucci(Human):
                     self.window.field_screen._change_ability_icon(True)
 
     def step_on_ground(self):
-        if self.y_speed >= 0 and self.y_vel > 0 or self.y_speed <= 0 and self.y_vel < 0:
+        if self.y_speed >= 0 and self.y_vel > 0 or self.y_speed <= 0 and \
+                self.y_vel < 0:
             self.jump_amount = 1
         self.y_speed = 0
         self.in_air = False
@@ -382,12 +406,18 @@ class Diavolo(Human):
             self.ability_use_tick = pygame.time.get_ticks()
             if self.window.field_screen.music_playing:
                 self.window.music.set_volume(SOUND_LEVEL / 2)
-            self.window.sound.play(pygame.mixer.Sound(path.join(DATA_PATH, SOUND_PATH, 'diavolo_ability.wav')))
+            self.window.sound.play(pygame.mixer.Sound(
+                path.join(DATA_PATH,
+                          SOUND_PATH,
+                          'diavolo_ability.wav')))
 
     def update_hp(self, mode=''):
         if not self.invincible and mode != 'check':
             self.hp -= 1
-            self.window.sound.play(pygame.mixer.Sound(path.join(DATA_PATH, SOUND_PATH, 'classic_hurt.wav')))
+            self.window.sound.play(pygame.mixer.Sound(
+                path.join(DATA_PATH,
+                          SOUND_PATH,
+                          'classic_hurt.wav')))
             self.invincible = True
             self.hit_tick = pygame.time.get_ticks()
         else:

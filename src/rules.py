@@ -1,6 +1,6 @@
 import pygame
 from os import path
-from essentials.agreements import *
+from src.agreements import *
 
 
 # Class for rules screen
@@ -20,8 +20,10 @@ class Rules:
                       '5. Press "N" key to mute/unmute sound effects',
                       '',
                       'Press any key to continue']
-        self.title_font = pygame.font.Font(pygame.font.match_font('lucidasans'), 72)
-        self.rules_font = pygame.font.Font(pygame.font.match_font('lucidaconsole'), 20)
+        self.title_font = pygame.font.Font(
+            pygame.font.match_font('lucidasans'), 72)
+        self.rules_font = pygame.font.Font(
+            pygame.font.match_font('lucidaconsole'), 20)
         self._set_text_coord()
 
     def _set_text_coord(self):
@@ -43,7 +45,8 @@ class Rules:
 
     # Draws text
     def _draw_text(self, screen):
-        string_title = self.title_font.render(self.title, True, pygame.Color('white'))
+        string_title = self.title_font.render(
+            self.title, True, pygame.Color('white'))
         rect_title = string_title.get_rect()
         rect_title = rect_title.move(40, 30)
         screen.blit(string_title, rect_title)

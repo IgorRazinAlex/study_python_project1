@@ -1,8 +1,8 @@
 from os import path, listdir
-from essentials.characters import *
-from essentials.blocks import *
+from src.characters import *
+from src.blocks import *
 import csv
-from essentials.agreements import *
+from src.agreements import *
 
 
 # Class for level
@@ -14,7 +14,8 @@ class Field:
 
     def start_music(self):
         self.window.music.stop()
-        self.window.music.play(pygame.mixer.Sound(path.join(DATA_PATH, SOUND_PATH, 'arcadia.wav')), loops=-1)
+        self.window.music.play(pygame.mixer.Sound(
+            path.join(DATA_PATH, SOUND_PATH, 'arcadia.wav')), loops=-1)
         self.window.music.set_volume(SOUND_LEVEL)
 
     # Initialize icons
@@ -46,16 +47,18 @@ class Field:
         self.cur_sound_icon = self.sound_icons[0]
         self.sound_icon_coords = (50, 575)
 
-        self.ability_icons = [pygame.image.load(path.join(DATA_PATH,
-                                                          IMAGE_PATH,
-                                                          TEXTURES_PATH,
-                                                          ICONS_PATH,
-                                                          'can_use_ability.png')),
-                              pygame.image.load(path.join(DATA_PATH,
-                                                          IMAGE_PATH,
-                                                          TEXTURES_PATH,
-                                                          ICONS_PATH,
-                                                          'can_not_use_ability.png'))]
+        self.ability_icons = [pygame.image.load(
+            path.join(DATA_PATH,
+                      IMAGE_PATH,
+                      TEXTURES_PATH,
+                      ICONS_PATH,
+                      'can_use_ability.png')),
+                              pygame.image.load(
+            path.join(DATA_PATH,
+                      IMAGE_PATH,
+                      TEXTURES_PATH,
+                      ICONS_PATH,
+                      'can_not_use_ability.png'))]
         self.cur_ability_icon = self.ability_icons[0]
         self.ability_icon_coords = (100, 575)
 
@@ -132,15 +135,20 @@ class Field:
         self.player_start = coords
 
         if name == 'hum':
-            self.player = pygame.sprite.GroupSingle(Human(coords, self.window))
+            self.player = pygame.sprite.GroupSingle(
+                Human(coords, self.window))
         elif name == 'jon':
-            self.player = pygame.sprite.GroupSingle(Jonathan(coords, self.window))
+            self.player = pygame.sprite.GroupSingle(
+                Jonathan(coords, self.window))
         elif name == 'jos':
-            self.player = pygame.sprite.GroupSingle(Joseph(coords, self.window))
+            self.player = pygame.sprite.GroupSingle(
+                Joseph(coords, self.window))
         elif name == 'puc':
-            self.player = pygame.sprite.GroupSingle(Pucci(coords, self.window))
+            self.player = pygame.sprite.GroupSingle(
+                Pucci(coords, self.window))
         elif name == 'dia':
-            self.player = pygame.sprite.GroupSingle(Diavolo(coords, self.window))
+            self.player = pygame.sprite.GroupSingle(
+                Diavolo(coords, self.window))
 
     # Spawns spike
     def spawn_spike(self, spike_type, coords):
@@ -218,18 +226,22 @@ class Field:
 
     # bool statement if player is out of screen bounds
     def _player_out_of_bounds(self):
-        if self.player.sprite.x > WINDOW_SIZE[0] - 25 or self.player.sprite.x < 0:
+        if self.player.sprite.x > WINDOW_SIZE[0] - 25 or \
+                self.player.sprite.x < 0:
             return True
-        if self.player.sprite.y > WINDOW_SIZE[1] - 25 or self.player.sprite.y < 0:
+        if self.player.sprite.y > WINDOW_SIZE[1] - 25 or \
+                self.player.sprite.y < 0:
             return True
 
         return False
 
     # bool statement if player has reached end
     def _player_reached_end(self):
-        return pygame.sprite.collide_rect(self.player.sprite, self.portal.sprite)
+        return pygame.sprite.collide_rect(self.player.sprite,
+                                          self.portal.sprite)
 
-    # Mutes or unmutes music. Has a time period when player can`t mute or unmute music after muting or unmuting it
+    # Mutes or unmutes music. Has a time period when player can`t mute or unmute
+    # music after muting or unmuting it
     def _mute_or_unmute_music(self):
         if self.music_change_tick is None:
             if self.window.music.get_volume() == 0:
@@ -247,7 +259,8 @@ class Field:
                 self.music_change_tick = None
                 self._mute_or_unmute_music()
 
-    # Mutes or unmutes sounds. Has a time period when player can`t mute or unmute sound after muting or unmuting it
+    # Mutes or unmutes sounds. Has a time period when player can`t mute or
+    # unmute sound after muting or unmuting it
     def _mute_or_unmute_sound(self):
         if self.sound_change_tick is None:
             if self.window.sound.get_volume() == 0:

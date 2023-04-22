@@ -1,6 +1,6 @@
 import pygame
 from os import path
-from essentials.agreements import *
+from src.agreements import *
 
 
 # Standard block
@@ -9,7 +9,11 @@ class Block(pygame.sprite.Sprite):
         super().__init__()
         self.x, self.y = coords
         self.rect = pygame.Rect(self.x, self.y, 25, 25)
-        self.image = pygame.image.load(path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, BLOCKS_PATH, f'{type}.png'))
+        self.image = pygame.image.load(path.join(DATA_PATH,
+                                                 IMAGE_PATH,
+                                                 TEXTURES_PATH,
+                                                 BLOCKS_PATH,
+                                                 f'{type}.png'))
 
 
 # Standard spike - colliding with it reduces hp if character isn`t invincible
@@ -18,7 +22,11 @@ class Spike(pygame.sprite.Sprite):
         super().__init__()
         self.x, self.y = coords
         self.rect = pygame.Rect(self.x, self.y, 25, 25)
-        self.image = pygame.image.load(path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, OBSTACLES_PATH, f'{type}.png'))
+        self.image = pygame.image.load(path.join(DATA_PATH,
+                                                 IMAGE_PATH,
+                                                 TEXTURES_PATH,
+                                                 OBSTACLES_PATH,
+                                                 f'{type}.png'))
         self.mask = pygame.mask.from_surface(self.image)
 
 
@@ -28,7 +36,11 @@ class Orb(pygame.sprite.Sprite):
         super().__init__()
         self.x, self.y = coords
         self.rect = pygame.Rect(self.x, self.y, 25, 25)
-        self.image = pygame.image.load(path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, OBSTACLES_PATH, 'o.png'))
+        self.image = pygame.image.load(path.join(DATA_PATH,
+                                                 IMAGE_PATH,
+                                                 TEXTURES_PATH,
+                                                 OBSTACLES_PATH,
+                                                 'o.png'))
 
 
 # Standard portal - colliding with it finishes the level
@@ -37,7 +49,11 @@ class EndPortal(pygame.sprite.Sprite):
         super().__init__()
         self.x, self.y = coords
         self.rect = pygame.Rect(self.x, self.y, 25, 25)
-        self.image = pygame.image.load(path.join(DATA_PATH, IMAGE_PATH, TEXTURES_PATH, OBSTACLES_PATH, 'e.png'))
+        self.image = pygame.image.load(path.join(DATA_PATH,
+                                                 IMAGE_PATH,
+                                                 TEXTURES_PATH,
+                                                 OBSTACLES_PATH,
+                                                 'e.png'))
         self.orig_image = self.image.copy()
         self.rot_angle = 0
 
