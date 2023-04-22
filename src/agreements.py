@@ -1,0 +1,15 @@
+WINDOW_SIZE = (1100, 625)
+DATA_PATH = 'data'
+SOUND_PATH = 'sounds'
+IMAGE_PATH = 'images'
+BACKGROUND_PATH = 'backgrounds'
+FPS = 120
+LEVEL_PATH = 'levels'
+BLOCK_SIZE = 25
+TEXTURES_PATH = 'textures'
+BLOCKS_PATH = 'blocks'
+OBSTACLES_PATH = 'obstacles'
+CHARACTERS_PATH = 'characters'
+ICONS_PATH = 'icons'
+CHARACTERS = ('hum', 'dia', 'puc', 'jon', 'jos')
+SOUND_LEVEL = 0.1
