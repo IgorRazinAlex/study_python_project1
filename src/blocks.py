@@ -16,7 +16,7 @@ class Block(pygame.sprite.Sprite):
                                                  f'{type}.png'))
 
 
-# Standard spike - colliding with it reduces hp if character isn`t invincible
+# Standard spike - colliding with it reduces hp if character isn`t invincible dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsddsdsdsdsd
 class Spike(pygame.sprite.Sprite):
     def __init__(self, coords, type):
         super().__init__()
