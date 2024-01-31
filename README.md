@@ -27,6 +27,7 @@ You can mute and unmute in-game music and sounds by pressing
 git clone git@github.com:IgorRazinAlex/study_python_project1.git ~/Games/ThroughTheTimeAndSpace
 cd ~/Games/ThroughTheTimeAndSpace
 chmod +x install.sh
+chmod +x install_docker.sh
 ./install
 ```
 
