@@ -1,0 +1,22 @@
+name: Linter & Testing
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "*" ]
+
+permissions: write-all
+
+jobs:
+  Linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python Linter
+        uses: sunnysid3up/python-linter@master
+        with:
+          source: "src"
+          mypy-options: "--show-error-codes"
+          pylint-options: "--rcfile=setup.cfg"
+          isort-options: "-w 100"
