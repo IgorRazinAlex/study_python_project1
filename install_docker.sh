@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt-get install cmake g++ ca-certificates curl gnupg docker-ce \
+sudo apt-get install ca-certificates curl gnupg docker-ce \
      docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
      libgtest-dev
 sudo install -m 0755 -d /etc/apt/keyrings

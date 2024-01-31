@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Prepare System
+        run: |
+          sudo apt-get install -y python3-pip
+          pip install pygame
       - name: Python Linter
         uses: sunnysid3up/python-linter@master
         with:
