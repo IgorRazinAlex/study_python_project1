@@ -30,7 +30,6 @@ class Game:
 
     # Initializes screen
     def _init_screen(self):
-        pygame.init()
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         pygame.display.set_caption('Through the Time and Space')
         self.cur_screen = 'start_screen'
